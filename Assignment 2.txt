@@ -1,0 +1,448 @@
+1.
+select co.continent , c.countryname
+from countries c
+join 
+continents co on co.contid = c.continent
+order by
+co.continent;
+
+
+2.
+select  co.continent, count(countryname)
+from countries c
+join continents co on co.contid = c.continent
+group by co.continent
+order by co.continent;
+
+
+3.
+SELECT 
+    c.countryname, cm.maker
+FROM 
+    countries c
+LEFT JOIN 
+    car_makers cm ON c.countryid = cm.country
+WHERE 
+    cm.maker IS NULL;
+
+
+4.
+select c.countryname, cm.fullname
+from countries c
+left join car_makers cm on cm.country = c.countryid
+where cm.country = 4;
+
+
+5.
+select c.countryname, cm.fullname
+from countries c
+left join car_makers cm on cm.country = c.countryid
+where cm.country = 1  or cm.country = 3;
+
+
+6.
+SELECT 
+    cm.maker,c.countryname, co.continent
+FROM 
+    car_makers cm
+JOIN 
+    countries c ON cm.country = c.countryid
+JOIN 
+    continents co ON c.continent= co.contid
+WHERE 
+    cm.maker = 'volvo';
+
+
+7.
+select cm.fullname, md.model
+from model_details md
+join car_makers cm on md.maker = cm.id
+where cm.fullname = 'Ford Motor Company';
+
+
+8.
+SELECT 
+    c.countryname, COUNT(md.modelid) 
+FROM 
+    car_makers cm
+JOIN 
+    countries c ON cm.country = c.countryid
+JOIN 
+    model_details md ON cm.id = md.maker
+WHERE 
+    c.countryname = 'germany'
+group by c.countryname;
+
+
+9.
+SELECT 
+    c.countryname,  md.model, cm.fullname as makername, cm.id as makerid
+FROM 
+    car_makers cm
+JOIN 
+    countries c ON cm.country = c.countryid
+JOIN 
+    model_details md ON cm.id = md.maker
+WHERE 
+    c.countryname = 'japan';
+
+
+10.
+
+A.  -- Highest mpg 
+SELECT 
+    cn.Descr AS model_name, cd.mpg ,c.CountryName,co.Continent, 'Highest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.mpg DESC
+FETCH FIRST 1 ROW ONLY
+-----Lowest mpg
+SELECT 
+    cn.Descr AS model_name,cd.mpg , c.CountryName, co.Continent,'Lowest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.mpg ASC
+FETCH FIRST 1 ROW ONLY;
+
+B. -----Highest cylinders
+SELECT 
+    cn.Descr AS model_name, cd.cylinders ,c.CountryName,co.Continent, 'Highest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.cylinders DESC
+FETCH FIRST 1 ROW ONLY
+-----Lowest cylinders
+SELECT 
+    cn.Descr AS model_name,cd.cylinders , c.CountryName, co.Continent,'Lowest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.cylinders ASC
+FETCH FIRST 1 ROW ONLY;
+
+
+C. ----Highest Edispl
+SELECT 
+    cn.Descr AS model_name, cd.edispl ,c.CountryName,co.Continent, 'Highest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.edispl DESC
+FETCH FIRST 1 ROW ONLY;
+
+----Lowest Edispl
+SELECT 
+    cn.Descr AS model_name,cd.edispl , c.CountryName, co.Continent,'Lowest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.edispl ASC
+FETCH FIRST 1 ROW ONLY;
+
+D. ----Highest HorsePower
+SELECT 
+    cn.Descr AS model_name, cd.HorsePower ,c.CountryName,co.Continent, 'Highest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.HorsePower DESC
+FETCH FIRST 1 ROW ONLY;
+
+----Lowest Horsepower
+SELECT 
+    cn.Descr AS model_name,cd.HorsePower , c.CountryName, co.Continent,'Lowest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.HorsePower ASC
+FETCH FIRST 1 ROW ONLY;
+
+E. ----Highest Wieght
+SELECT 
+    cn.Descr AS model_name, cd.Weight ,c.CountryName,co.Continent, 'Highest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.Weight DESC
+FETCH FIRST 1 ROW ONLY;
+----Lowest Wieght
+SELECT 
+    cn.Descr AS model_name,cd.Weight , c.CountryName, co.Continent,'Lowest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.Weight ASC
+FETCH FIRST 1 ROW ONLY;
+
+F. ----Highest Accel
+SELECT 
+    cn.Descr AS model_name, cd.Accel ,c.CountryName,co.Continent, 'Highest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.Accel DESC
+FETCH FIRST 1 ROW ONLY;
+
+
+----Lowest Accel
+SELECT 
+    cn.Descr AS model_name,cd.Accel , c.CountryName, co.Continent,'Lowest' as type
+FROM 
+    Car_Details cd
+JOIN 
+    Car_Names cn ON cd.ID = cn.ID
+JOIN 
+    Model_Details md ON cn.Model = md.Model
+JOIN 
+    Car_Makers cm ON md.Maker = cm.ID
+JOIN 
+    Countries c ON cm.Country = c.CountryID
+JOIN 
+    Continents co ON c.Continent = co.ContID
+ORDER BY 
+    cd.Accel ASC
+FETCH FIRST 1 ROW ONLY;
+
+
+11.
+SELECT 
+    year,
+    COUNT(ID) AS total_cars
+FROM 
+    Car_Details
+GROUP BY 
+    year
+ORDER BY 
+    total_cars DESC
+FETCH FIRST 1 ROW ONLY;
+
+12.
+SELECT 
+    year,
+    COUNT(ID) AS total_cars
+FROM 
+    Car_Details
+GROUP BY 
+    year
+ORDER BY 
+    total_cars ASC
+FETCH FIRST 1 ROW ONLY;
+
+
+13.
+
+SELECT  'Mpg' as detail, min(mpg), max(mpg),avg(mpg)
+    from car_details
+union all
+SELECT 'Cylinders' as detail, min(cylinders), max(cylinders),avg(cylinders)
+    from car_details
+union all
+SELECT 'edispl' as detail, min(edispl), max(edispl),avg(edispl)
+    from car_details
+union all
+SELECT 'Horsepower' as detail, min(Horsepower), max(Horsepower),avg(Horsepower)
+    from car_details
+union all
+SELECT 'Weight' as detail, min(Weight), max(Weight),avg(Weight)
+    from car_details
+union all
+SELECT 'Accel' as detail, min(Accel), max(Accel),avg(Accel)
+    from car_details
+
+
+14.
+
+SELECT 
+    'Horsepower' AS attribute,
+    AVG(horsepower) AS mean_value,
+    MEDIAN(horsepower) AS median_value,
+    STDDEV(horsepower) AS stddev_value
+FROM 
+    Car_Details
+
+UNION ALL
+
+SELECT 
+    'Weight' AS attribute,
+    AVG(weight) AS mean_value,
+    MEDIAN(weight) AS median_value,
+    STDDEV(weight) AS stddev_value
+FROM 
+    Car_Details
+
+UNION ALL
+SELECT 
+    'Acceleration' AS attribute,
+    AVG(accel) AS mean_value,
+    MEDIAN(accel) AS median_value,
+    STDDEV(accel) AS stddev_value
+FROM 
+    Car_Details;
+
+
+15.
+1.Continents:
+---------------
+PK: ContID
+
+Attributes: Continent
+
+2.Countries:
+-----------------
+
+PK: CountryID
+
+FK: Continent (References ContID in Continents)
+
+Attributes: CountryName
+
+3. Car_Makers:
+-----------------------
+
+PK: ID
+
+FK: Country (References CountryID in Countries)
+
+Attributes: Maker, FullName
+
+4.Model_Details:
+-------------------------
+
+PK: ModelID
+
+FK: Maker (References ID in Car_Makers)
+
+Attributes: Model
+
+5.Car_Names:
+--------------------
+
+PK: ID
+
+FK: Model (References Model in Model_Details)
+
+Attributes: Descr
+
+6.Car_Details:
+----------------------
+
+PK: ID
+
+FK: ID (References ID in Car_Names)
+
+Attributes: mpg, cylinders, edispl, horsepower, weight, accel, year
+
+
